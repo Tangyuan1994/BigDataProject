@@ -129,7 +129,7 @@ On récupère le champs usersource et on met sa valeur dans Id, et son type « u
  ```
  val userfile = file.map(line=>line.split(",")).map(fields=>((fields(1),"utilisateur"))) 
  ```
-on crée le vertex correspondant 
+On crée le vertex correspondant 
  
  ```
  val userfileg=userfile.toDF("id","type")
@@ -139,12 +139,12 @@ On récupère le champs pcsource et on met sa valeur dans Id, et son type «mach
  ```
  val machinefile = file.map(line=>line.split(",")).map(fields=>((fields(3),"machine")))
  ```
-on crée le vertex correspondant
+On crée le vertex correspondant
 
  ```
  val machinefileg=machinefile.toDF("id","type")
  ```
-on rassemble les deux parties dans un même vertex 
+On rassemble les deux parties dans un même vertex 
 
  ```
  val totalfile=userfileg.unionAll(machinefileg)
@@ -165,7 +165,7 @@ Créer le graphe :
  ```
  val g = GraphFrame(v,e) 
  ```
-vérifier qu’on a bien créé les vertex et les arcs :
+Vérifier qu’on a bien créé les vertex et les arcs :
  
  ```
 g.vertices.show()
@@ -199,12 +199,12 @@ result.rdd.map(_.toString()).saveAsTextFile("/home/cloudera/result")
 ### 10. Calcul de la page rank de chaque sommet :
 
 
-exécuter PageRank jusqu’à la convergence à la tolerance "tol":
+Exécuter PageRank jusqu’à la convergence à la tolerance "tol":
 ```
 val results = g.pageRank.resetProbability(0.15).tol(0.01).run()
 ```
 
-afficher les pageranks résultant et le poids des arc final
+Afficher les pageranks résultant et le poids des arc final
 ```
 results.vertices.select("id", "pagerank").show()
 results.edges.select("src", "dst", "weight").show()
