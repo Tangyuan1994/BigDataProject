@@ -148,7 +148,7 @@ On rassemble les deux parties dans un même vertex
 
  ```
  val totalfile=userfileg.unionAll(machinefileg)
-    val v=totalfile.toDF("id", "type").select("id","type").distinct()
+ val v=totalfile.toDF("id", "type").select("id","type").distinct()
  ```
 Récupérer les éléments du fichier Trifile un à un et le mettre dans le fichier newtrifile 
  
