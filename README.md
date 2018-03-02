@@ -123,6 +123,7 @@ val cleanfile = file.filter(line => !(line.contains("?")))
  
  ```
  hdfs dfs -get /home/cloudera/result result
+ 
  ```
 
 ### 6. Création de graphe : 
@@ -130,16 +131,16 @@ val cleanfile = file.filter(line => !(line.contains("?")))
 ```
 import org.graphframes.GraphFrame
 
- ```
+```
  
-**On récupère le champs usersource et on met sa valeur dans Id, et son type « utilisateur » dans type. **
+**On récupère le champs usersource et on met sa valeur dans Id, et son type « utilisateur » dans type.**
  
  ```
  val userfile = file.map(line=>line.split(",")).map(fields=>((fields(1),"utilisateur"))) 
- 
+
  ```
  
-**On crée le vertex correspondant **
+**On crée le vertex correspondant**
  
  ```
  val userfileg=userfile.toDF("id","type")
