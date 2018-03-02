@@ -1,4 +1,4 @@
-//By Wanyanyuan Tang and Mounia Bouhriz
+//By Wanyanyuan Tang(LMFI) and Mounia Bouhriz (SSSR)
 import org.graphframes.GraphFrame
 //Q1
 val file = sc.textFile("/user/hive/warehouse/new_auth_10000000.txt") 
