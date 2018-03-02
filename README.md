@@ -101,7 +101,9 @@ val cleanfile = file.filter(line => !(line.contains("?")))
 ### 3.  calculer le nombre d'accès d'un utilisateur à une machine 
 
  ```
- val trifile = cleanfile.map(line=>line.split(",")).map(fields=>((fields(1),fields(3)),1)).reduceByKey((v1,v2) => v1+v2)    ```
+ val trifile = cleanfile.map(line=>line.split(",")).map(fields=>((fields(1),fields(3)),1)).reduceByKey((v1,v2) => v1+v2)
+ 
+ ```
 
 ### 4. Afficher les Top10 des accès les plus fréquents, on fait un sortby avec la valeur « False » pour trier les éléments du haut en bas, et un take(10) pour afficher uniquement les 10 premiers. 
 
