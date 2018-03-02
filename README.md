@@ -83,9 +83,11 @@ Pour cette partie du projet, nous avons choisi d’utiliser le langage Scala.
 
 **command:**
 
+
  ```
 spark-shell --packages graphframes:graphframes:0.1.0-spark1.6 -i BigData_Wanyanyuan_Mounia.scala
  ```
+ 
 ### 1.  lire le fichier de logs et le stocker dans la variable "file".
 
 ```
@@ -103,9 +105,11 @@ val cleanfile = file.filter(line => !(line.contains("?")))
 
 ### 4. Afficher les Top10 des accès les plus fréquents, on fait un sortby avec la valeur « False » pour trier les éléments du haut en bas, et un take(10) pour afficher uniquement les 10 premiers. 
 
+
  ```
  cleanfile.map(line=>line.split(",")).map(fields=>((fields(1),fields(3)),1)).reduceByKey((v1,v2) => v1+v2).sortBy(_._2,false).take(10)
  ```
+ 
  ### 5. Sauvegarder les résultats dans HDFS 
  
  ```
