@@ -61,9 +61,8 @@ SELECT count FROM project WHERE cnxtype = '?' or authtype = '?'
  ```
 SELECT count( DISTINCT usersource) FROM project
  ```
-<font color="blue"> 
 ⇒ Résultat : 32292
-<font>
+
 
 ### 3) Calculer le nombre de connexions par utilisateur : 
 
@@ -158,7 +157,7 @@ Récupérer les éléments du fichier Trifile un à un et le mettre dans le fich
 Créer les arcs et stocker le résultat dans la variable e
  
  ```
- val e=newtrifile.toDF("src","dst","weight")
+ val e=newtrifile.toDF("src","dst","connexion")
  ```
 Créer le graphe : 
  
