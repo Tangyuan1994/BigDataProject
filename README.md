@@ -129,57 +129,67 @@ val cleanfile = file.filter(line => !(line.contains("?")))
 
 ```
 import org.graphframes.GraphFrame
+
  ```
  
 **On récupère le champs usersource et on met sa valeur dans Id, et son type « utilisateur » dans type. **
  
  ```
  val userfile = file.map(line=>line.split(",")).map(fields=>((fields(1),"utilisateur"))) 
+ 
  ```
  
 **On crée le vertex correspondant **
  
  ```
  val userfileg=userfile.toDF("id","type")
+ 
  ```
  
 **On récupère le champs pcsource et on met sa valeur dans Id, et son type «machine» dans type.**
  
  ```
  val machinefile = file.map(line=>line.split(",")).map(fields=>((fields(3),"machine")))
+ 
  ```
  
 **On crée le vertex correspondant**
 
  ```
  val machinefileg=machinefile.toDF("id","type")
+ 
  ```
 **On rassemble les deux parties dans un même vertex **
 
  ```
  val totalfile=userfileg.unionAll(machinefileg)
  val v=totalfile.toDF("id", "type").select("id","type").distinct()
+ 
  ```
 **Récupérer les éléments du fichier Trifile un à un et le mettre dans le fichier newtrifile **
  
  ```
  val newtrifile = trifile.map(fields=>(fields._1._1, fields._1._2, fields._2))
+ 
  ```
 **Créer les arcs et stocker le résultat dans la variable e**
  
  ```
  val e=newtrifile.toDF("src","dst","connexion")
+ 
  ```
 **Créer le graphe : **
  
  ```
  val g = GraphFrame(v,e) 
+ 
  ```
 **Vérifier qu’on a bien créé les vertex et les arcs :**
  
  ```
 g.vertices.show()
 g.edges.show()
+
 ```
 
 ### 7.Calcul et tri du nombre d’arcs entrants et sortants pour chaque nœud : 
@@ -189,6 +199,7 @@ val indre=g.inDegrees.sort(desc("inDegree"))
 val outdre=g.outDegrees.sort(desc("outDegree"))
 indre.rdd.map(_.toString()).saveAsTextFile("/home/cloudera/indre")
 outdre.rdd.map(_.toString()).saveAsTextFile("/home/cloudera/outdre")
+
 ```
 
 ### 8. Calcul du nombre des composants conennexes de chaque sommet :
@@ -197,6 +208,7 @@ outdre.rdd.map(_.toString()).saveAsTextFile("/home/cloudera/outdre")
 val component = g.connectedComponents.run()
 component.select("id", "component").orderBy("component").show()
 component.rdd.map(_.toString()).saveAsTextFile("/home/cloudera/component")
+
 ```
 
 ### 9. Calcul du nombre des composants fortement connexes de chaque sommet :
