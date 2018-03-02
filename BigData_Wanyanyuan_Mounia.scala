@@ -37,6 +37,5 @@ result.select("id", "component").orderBy("component").show()
 result.rdd.map(_.toString()).saveAsTextFile("/home/cloudera/result")
 //Q10
 val results = g.pageRank.resetProbability(0.15).tol(0.01).run()
-results.vertices.select("id", "pagerank").show()
-results.edges.select("src", "dst", "weight").show()
+results.vertices.select("id", "pagerank").orderBy(desc("pagerank")).show()
 results.rdd.map(_.toString()).saveAsTextFile("/home/cloudera/results")
