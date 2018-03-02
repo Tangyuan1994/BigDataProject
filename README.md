@@ -82,6 +82,7 @@ SELECT usersource, count as number from project WHERE decision ='Success' group 
 Pour cette partie du projet, nous avons choisi d’utiliser le langage Scala. 
 
 **command:**
+
  ```
 spark-shell --packages graphframes:graphframes:0.1.0-spark1.6 -i BigData_Wanyanyuan_Mounia.scala
  ```
@@ -110,7 +111,9 @@ val cleanfile = file.filter(line => !(line.contains("?")))
  ```
  trifile.saveAsTextFile("/home/cloudera/result")
  ```
+ 
  **Récupérer le résultat du HDFS au disk local**
+ 
  
  ```
  hdfs dfs -get /home/cloudera/result result
@@ -121,21 +124,25 @@ val cleanfile = file.filter(line => !(line.contains("?")))
 ```
 import org.graphframes.GraphFrame
  ```
+ 
 **On récupère le champs usersource et on met sa valeur dans Id, et son type « utilisateur » dans type. **
  
  ```
  val userfile = file.map(line=>line.split(",")).map(fields=>((fields(1),"utilisateur"))) 
  ```
+ 
 **On crée le vertex correspondant **
  
  ```
  val userfileg=userfile.toDF("id","type")
  ```
+ 
 **On récupère le champs pcsource et on met sa valeur dans Id, et son type «machine» dans type.**
  
  ```
  val machinefile = file.map(line=>line.split(",")).map(fields=>((fields(3),"machine")))
  ```
+ 
 **On crée le vertex correspondant**
 
  ```
